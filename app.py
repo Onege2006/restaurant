@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+import sqlite3
 
 app = Flask(__name__)
 
@@ -12,11 +13,11 @@ translations = {
         'your_name': 'Your Name',
         'your_message': 'Your Message',
         'send': 'Send',
-'phone': 'Phone',
-'guests': 'Number of Guests',
-'reserve_now': 'Reserve Now',
+        'phone': 'Phone',
+        'guests': 'Number of Guests',
+        'reserve_now': 'Reserve Now',
         'address': 'Address',
-'gallery_title': 'The Atmosphere of our restaurant',
+        'gallery_title': 'The Atmosphere of our restaurant',
         'discover': 'Discover Menu',
         'book': 'Book a Table',
         'about': 'About',
@@ -29,9 +30,9 @@ translations = {
         'about_subtitle': 'A Taste of Elegance',
         'about_text': 'The Royal Ember is a fine dining restaurant where ambiance meets culinary art. We serve seasonal, chef-crafted dishes in a luxurious setting.',
         'our_menu': 'Our Menu',
-'menu_title': 'Experience Delicious Tastes',
-    'menu_subtitle': '— Chef\'s Dishes —',
-    'download_menu': 'Download Menu',
+        'menu_title': 'Experience Delicious Tastes',
+        'menu_subtitle': '— Chef\'s Dishes —',
+        'download_menu': 'Download Menu',
         'menu_description': 'Book now at The Royal Ember — known for shared plates, craft cocktails, curated wine list and impeccable service!',
         'book_table': 'Book your table',
         'view_menu': 'View Menu'
@@ -45,7 +46,7 @@ translations = {
         'your_message': 'Ваше сообщение',
         'send': 'Отправить',
         'address': 'Адрес',
-'gallery_title': 'Атмосфера нашего ресторана',
+        'gallery_title': 'Атмосфера нашего ресторана',
         'discover': 'Посмотреть меню',
         'book': 'Забронировать стол',
         'about': 'О нас',
@@ -58,12 +59,12 @@ translations = {
         'about_subtitle': 'Вкус Элегантности',
         'about_text': 'The Royal Ember — это ресторан высокой кухни, где атмосфера сочетается с кулинарным искусством. Мы подаём сезонные блюда от шефа в роскошной обстановке.',
         'our_menu': 'Наше Меню',
-'phone': 'Телефон',
-'guests': 'Количество гостей',
-'reserve_now': 'Забронировать',
-'menu_title': 'Попробуйте изысканные вкусы',
-    'menu_subtitle': '— Блюда от шефа —',
-    'download_menu': 'Скачать меню',
+        'phone': 'Телефон',
+        'guests': 'Количество гостей',
+        'reserve_now': 'Забронировать',
+        'menu_title': 'Попробуйте изысканные вкусы',
+        'menu_subtitle': '— Блюда от шефа —',
+        'download_menu': 'Скачать меню',
         'menu_description': 'Забронируйте столик в The Royal Ember — это место с блюдами для всех, авторскими коктейлями, винной картой и безупречным сервисом!',
         'book_table': 'Забронировать столик',
         'view_menu': 'Посмотреть Меню'
@@ -73,14 +74,14 @@ translations = {
         'title_main': 'ДӘМДІ АС',
         'title_sub': 'ТАМАҚТАНУ',
         'discover': 'Мәзірді көру',
-'gallery_title': 'Ресторанымыздың атмосферасы',
+        'gallery_title': 'Ресторанымыздың атмосферасы',
         'book': 'Үстелге тапсырыс беру',
         'about': 'Біз туралы',
         'menu': 'Мәзір',
         'gallery': 'Галерея',
-'phone': 'Телефон',
-'guests': 'Қонақ саны',
-'reserve_now': 'Тапсырыс беру',
+        'phone': 'Телефон',
+        'guests': 'Қонақ саны',
+        'reserve_now': 'Тапсырыс беру',
         'contact': 'Байланыс',
         'reservation': 'Тапсырыс беру',
         'copyright': '© 2025 The Royal Ember Рестораны. Авторы: Әлібек Өнеге.',
@@ -95,9 +96,9 @@ translations = {
         'address': 'Мекенжай',
         'menu_description': 'The Royal Ember — ортақ тағамдар, ерекше коктейльдер, шарап тізімі және мінсіз қызмет үшін танымал мейрамхана. Қазір тапсырыс беріңіз!',
         'book_table': 'Үстелге тапсырыс беру',
-'menu_title': 'Керемет дәмдер әлемі',
-    'menu_subtitle': '— Аспаз шеберлігі —',
-    'download_menu': 'Мәзірді жүктеу',
+        'menu_title': 'Керемет дәмдер әлемі',
+        'menu_subtitle': '— Аспаз шеберлігі —',
+        'download_menu': 'Мәзірді жүктеу',
         'view_menu': 'Мәзірді көру'
     }
 }
@@ -109,12 +110,20 @@ def index():
     trans = translations.get(lang, translations['en'])
     return render_template('index.html', trans=trans)
 
+
 @app.route('/send-message', methods=['POST'])
 def send_message():
     name = request.form['name']
     message = request.form['message']
-    print(f"Message from {name}: {message}")
-    return redirect(url_for('index'))  # или render_template
+
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('index'))
+
 
 @app.route('/reserve', methods=['POST'])
 def reserve():
@@ -126,9 +135,17 @@ def reserve():
     guests = request.form.get('guests')
     message = request.form.get('message')
 
-    # Тут можно отправить письмо или сохранить в базу данных
-    print(f"Reservation from {name}, {email}, {phone} for {date} at {time} — {guests} guests")
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute('''INSERT INTO reservations
+        (name, email, phone, date, time, guests, message)
+        VALUES (?, ?, ?, ?, ?, ?, ?)''',
+        (name, email, phone, date, time, guests, message))
+    conn.commit()
+    conn.close()
+
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
