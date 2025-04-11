@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Royal Ember</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-/kSfMjcsqzLbWqjcHDsLXpK2b8vEt1vOP9l5EaH0VqkY6Sbf8V6fMdYvHkBAZgS95TfM6bJeYb6O9WfTF9wKog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/page-flip.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <header>
+        <nav class="navbar">
+            <!-- Левая часть: языки + About + Menu -->
+            <ul class="nav-left">
+    <div class="nav-lang">
+        <li><a href="/?lang=kz">KZ</a></li>
+        <li><a href="/?lang=ru">RU</a></li>
+        <li><a href="/?lang=en">EN</a></li>
+    </div>
+    <li><a href="#about">{{ trans['about'] }}</a></li>
+    <li><a href="#menu">{{ trans['menu'] }}</a></li>
+</ul>
+
+
+            <!-- Центр: логотип -->
+            <div class="logo">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+                </a>
+            </div>
+
+            <!-- Правая часть: Gallery + Contact + Reservation -->
+           <ul class="nav-right">
+    <li><a href="#gallery">{{ trans['gallery'] }}</a></li>
+    <li><a href="#contact">{{ trans['contact'] }}</a></li>
+    <li><a href="#reservation">{{ trans['reservation'] }}</a></li>
+
+            <!-- Гамбургер для моб -->
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <ul class="mobile-menu" id="mobileMenu">
+        <li><a href="?lang=kz">KZ</a></li>
+        <li><a href="?lang=ru">RU</a></li>
+        <li><a href="?lang=en">EN</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#reservation">Reservation</a></li>
+    </ul>
+</header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+    <p>{{ trans['copyright'] }}</p>
+</footer>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('.menu-grid');
+    if (section) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            section.classList.add('visible');
+            observer.disconnect();
+          }
+        }, { threshold: 0.2 }
+      );
+      observer.observe(section);
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/page-flip.browser.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-section" id="home">
+    <div class="hero-overlay">
+        <div class="hero-content" data-aos="fade-up">
+            <p class="hero-welcome">{{ trans['welcome'] }}</p>
+            <h1 class="hero-title">
+                {{ trans['title_main'] }}<br>
+                <span>{{ trans['title_sub'] }}</span>
+            </h1>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn-gold">{{ trans['discover'] }}</a>
+                <a href="#reservation" class="btn-outline">{{ trans['book'] }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section class="about-section" id="about">
+    <div class="about-container" data-aos="fade-up">
+        <h2 class="section-title">{{ trans['about_title'] }}</h2>
+        <h3 class="section-subtitle">{{ trans['about_subtitle'] }}</h3>
+        <p class="about-description">{{ trans['about_text'] }}</p>
+        <div class="about-icon">
+<img src="{{ url_for('static', filename='img/logo.png') }}" alt="Crown Icon" style="height: 60px; width: auto; max-width: 100%;">
+        </div>
+    </div>
+</section>
+
+<section class="menu-section" id="menu">
+    <div class="container">
+        <h2 class="section-subtitle">{{ trans['menu_subtitle'] }}</h2>
+        <h1 class="section-title">{{ trans['menu_title'] }}</h1>
+
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/nycut.png') }}" alt="{{ trans['dish_nycut'] }}">
+                <h3>{{ trans['dish_nycut'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/primerib.png') }}" alt="{{ trans['dish_primerib'] }}">
+                <h3>{{ trans['dish_primerib'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/bonein.png') }}" alt="{{ trans['dish_bonein'] }}">
+                <h3>{{ trans['dish_bonein'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/bbq.png') }}" alt="{{ trans['dish_bbq'] }}">
+                <h3>{{ trans['dish_bbq'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/lavender.png') }}" alt="{{ trans['dish_lavender'] }}">
+                <h3>{{ trans['dish_lavender'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/risotto.png') }}" alt="{{ trans['dish_risotto'] }}">
+                <h3>{{ trans['dish_risotto'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/caviar.png') }}" alt="{{ trans['dish_caviar'] }}">
+                <h3>{{ trans['dish_caviar'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/tartare.png') }}" alt="{{ trans['dish_tartare'] }}">
+                <h3>{{ trans['dish_tartare'] }}</h3>
+            </div>
+            <div class="menu-item">
+                <img src="{{ url_for('static', filename='img/duck.png') }}" alt="{{ trans['dish_duck'] }}">
+                <h3>{{ trans['dish_duck'] }}</h3>
+            </div>
+        </div>
+
+        <div class="menu-download">
+            <a href="{{ url_for('static', filename='menu.pdf') }}" class="btn-outline" download>
+                {{ trans['download_menu'] }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-subtitle">{{ trans['gallery'] }}</h2>
+    <h1 class="section-title">{{ trans['gallery_title'] }}</h1>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery1.jpg') }}" alt="Gallery Image 1">
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery2.jpg') }}" alt="Gallery Image 2">
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery3.jpg') }}" alt="Gallery Image 3">
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery4.jpg') }}" alt="Gallery Image 4">
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery5.jpg') }}" alt="Gallery Image 5">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-subtitle">{{ trans['contact'] }}</h2>
+    <h1 class="section-title">{{ trans['contact_us'] }}</h1>
+
+    <div class="contact-content">
+      <!-- Левая часть: информация и соцсети -->
+      <div class="contact-info">
+        <p><i class="fas fa-map-marker-alt"></i> {{ trans['address'] }}: Astana, Kazakhstan</p>
+        <p><i class="fas fa-envelope"></i> Email: contact@theroyalember.com</p>
+        <p><i class="fas fa-phone"></i> +7 (777) 000-00-00</p>
+
+      </div>
+
+      <!-- Правая часть: форма чата -->
+      <div class="contact-form">
+        <form method="POST" action="/send-message">
+          <input type="text" name="name" placeholder="{{ trans['your_name'] }}" required>
+          <textarea name="message" placeholder="{{ trans['your_message'] }}" required></textarea>
+          <button type="submit">{{ trans['send'] }}</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Google Map -->
+    <div class="map-container" data-aos="fade-up">
+      <iframe
+        src="https://www.google.com/maps?q=Astana,%20Kazakhstan&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>
+<section class="reservation-section" id="reservation">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-subtitle">{{ trans['reservation'] }}</h2>
+    <h1 class="section-title">{{ trans['book_table'] }}</h1>
+
+    <form action="/reserve" method="POST" class="reservation-form">
+      <input type="text" name="name" placeholder="{{ trans['your_name'] }}" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="phone" placeholder="{{ trans['phone'] }}" required>
+      <input type="date" name="date" required>
+      <input type="time" name="time" required>
+
+      <select name="guests" required>
+        <option value="" disabled selected>{{ trans['guests'] }}</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4+">4+</option>
+      </select>
+
+      <textarea name="message" placeholder="{{ trans['your_message'] }}"></textarea>
+      <button type="submit">{{ trans['reserve_now'] }}</button>
+    </form>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

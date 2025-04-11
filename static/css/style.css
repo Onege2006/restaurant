@@ -1,0 +1,848 @@
+/* ===== RESET & BODY ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+      scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: #0d0d0d;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+main {
+    padding-top: 100px;
+}
+
+/* ===== HEADER ===== */
+header {
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(6px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+}
+
+/* Обёртка, чтобы контролировать расположение по сетке */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+
+
+
+/* Боковые меню */
+.nav-left,
+.nav-right {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Центрированный логотип */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo img {
+    height: 100px;
+}
+
+/* Ссылки */
+.nav-left li a,
+.nav-right li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 1px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-left li a::after,
+.nav-right li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background-color: #d4b068;
+    transition: width 0.3s ease;
+}
+
+.nav-left li a:hover,
+.nav-right li a:hover {
+    color: #d4b068;
+}
+
+.nav-left li a:hover::after,
+.nav-right li a:hover::after {
+    width: 100%;
+}
+
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    height: 80vh;
+    background-image: url('../img/hero.jpg'); /* ← замена! */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* 💡 делает фон "приклеенным" */
+    position: relative;
+    z-index: 0;
+    font-family: 'Georgia', serif;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.65);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+.hero-content {
+    max-width: 700px;
+    z-index: 2;
+    position: relative;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+}
+
+.hero-welcome {
+    font-size: 18px;
+    color: #d4b068;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.hero-title {
+    font-size: 64px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.2;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+}
+
+.hero-title span {
+    color: #d4b068;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-gold,
+.btn-outline {
+    padding: 14px 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    border: 2px solid transparent;
+    font-family: 'Georgia', serif;
+}
+
+.btn-gold {
+    background-color: #d4b068;
+    color: #0d0d0d;
+}
+
+.btn-gold:hover {
+    background-color: #e0c07c;
+    color: #111;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #d4b068;
+    color: #d4b068;
+}
+
+.btn-outline:hover {
+    background-color: #d4b068;
+    color: #111;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: #111;
+    color: #aaa;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+/* ===== LANGUAGE SWITCHER ===== */
+.nav-lang {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    list-style: none;
+    margin-right: 1 rem; /* отступ справа перед About */
+}
+
+.nav-lang li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    border: 0.5px solid #9a803f;
+    padding: 2px 5px; /* 🔹 уменьшено с 4px 10px до 3px 8px */
+    border-radius: 0px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1px;
+}
+
+
+.nav-lang li a:hover {
+    background-color: #d4b068;
+    color: #111;
+}
+/* ===== HAMBURGER BUTTON ===== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    display: block;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    text-align: center;
+    z-index: 999;
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.mobile-menu li {
+    margin: 0.7rem 0;
+}
+
+.mobile-menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+.mobile-menu li a:hover {
+    color: #d4b068;
+}
+
+/* ===== MEDIA QUERY ===== */
+@media (max-width: 768px) {
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+/* ===== ANIMATION: FLOAT ===== */
+@keyframes floatText {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowText {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(255, 223, 150, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 12px rgba(255, 223, 150, 0.5);
+    }
+}
+
+.hero-title {
+    animation: floatText 6s ease-in-out infinite, glowText 8s ease-in-out infinite;
+}
+/* ===== ABOUT SECTION ===== */
+.about-section {
+    background-color: #0d0d0d;
+    padding-top: 80px; /* чтобы не налез navbar */
+    text-align: center;
+}
+
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #eee;
+    font-family: 'Georgia', serif;
+}
+
+.section-title {
+    font-size: 36px;
+    color: #d4b068;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(212, 176, 104, 0.3);
+}
+
+.section-subtitle {
+    font-size: 20px;
+    font-style: italic;
+    color: #ccc;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 1px;
+}
+
+.about-description {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #bbb;
+    padding: 0 10px;
+}
+
+/* ===== MENU SECTION ===== */
+.menu-section {
+    background-color: #0d0d0d;
+    padding: 100px 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.section-subtitle {
+    color: #d4b068;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+/* ===== MENU GRID ===== */
+.menu-section {
+    background-color: #0d0d0d;
+    padding: 100px 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.section-subtitle {
+    color: #d4b068;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    background: linear-gradient(to right, #fff, #d4b068);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.menu-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 60px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 80px;
+    justify-content: flex-start;
+}
+.menu-item {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    max-width: 440px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgb(12, 12, 12);
+}
+
+.menu-item img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 50%;
+    background-color: transparent;
+    padding: 10px;
+    box-shadow: 0 8px 20px rgb(12, 12, 12);
+}
+
+.menu-item h3 {
+    margin-top: 20px;
+    color: #0c0c0c;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.menu-download {
+    margin-top: 60px;
+}
+
+.menu-download a {
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #d4b068;
+    border: 2px solid #d4b068;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+.menu-download a:hover {
+    background-color: #d4b068;
+    color: #111;
+}
+/* ===== RESPONSIVE MENU PAGE ===== */
+@media screen and (max-width: 768px) {
+    .menu-section {
+        padding: 60px 15px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    .menu-grid {
+        flex-wrap: nowrap;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 10px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 20px;
+    }
+
+    .menu-item {
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+        max-width: 240px;
+    }
+
+    .menu-item img {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+
+    .menu-item h3 {
+        font-size: 1px;
+    }
+
+    .menu-download {
+        margin-top: 40px;
+    }
+
+    .menu-download a {
+        font-size: 13px;
+        padding: 10px 20px;
+    }
+}
+.gallery-section {
+    background-color: #0c0c0c;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.gallery-section .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.gallery-section .section-subtitle {
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    color: #d4b068;
+    margin-bottom: 30px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 5px;
+    padding: 0 10px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 0px;
+    transition: transform 0.5s ease, filter 0.4s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+@media screen and (max-width: 768px) {
+  .gallery-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 5px;
+    padding: 0 10px 30px;
+  }
+
+  .gallery-item {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    width: 250px;
+  }
+
+  .gallery-item img {
+    border-radius: 0px;
+    object-fit: cover;
+    height: 70%;
+    width: 100%;
+    max-height: 300px;
+  }
+}
+.contact-section {
+  background-color: #0d0d0d;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.contact-title {
+  margin-bottom: 50px;
+}
+
+.contact-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 280px;
+    padding-left: 100px; /* ← уменьшить или убрать */
+  text-align: left;
+  color: #ddd;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.contact-info i {
+  color: #d4b068;
+  margin-right: 10px;
+}
+
+.social-icons a {
+  margin-right: 10px;
+  color: #fff;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #d4b068;
+}
+
+.contact-form {
+        padding-right: 100px; /* ← уменьшить или убрать */
+  flex: 1;
+  min-width: 280px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #333;
+  font-family: 'Inter', sans-serif;
+}
+
+.contact-form button {
+  padding: 12px 25px;
+  background-color: #d4b068;
+  color: #0d0d0d;
+  font-weight: bold;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #e0c07c;
+}
+
+.map-container {
+  margin-top: 10px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 0px;
+}
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 20px 16px;
+    margin-top: 30px;
+  }
+
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #fff;
+  }
+
+  .contact-form button {
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 0px;
+    background-color: #d4b068;
+    color: #111;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(212, 176, 104, 0.3);
+  }
+
+  .contact-form button:hover {
+    background-color: #e2c57b;
+    color: #0d0d0d;
+  }
+}
+
+.reservation-section {
+  background: url('https://cdn.oliverbonacininetwork.com/uploads/sites/42/2022/04/Canoe-Interior-Evening-Vibes-5170-640x427.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 30px 10px;
+  text-align: center;
+  position: relative;
+    min-height: 100px;
+
+}
+.reservation-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.80);
+  z-index: 1;
+}
+.reservation-section * {
+  position: relative;
+  z-index: 2;
+}
+.reservation-section .section-subtitle {
+  color: #d4b068;
+  font-style: italic;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-family: 'Georgia', serif;
+}
+
+.reservation-section .section-title {
+  font-size: 36px;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  margin-bottom: 50px;
+  letter-spacing: 1px;
+}
+
+/* FORM */
+.reservation-form {
+  max-width: 650px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 176, 104, 0.15);
+  border-radius: 0px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+  padding: 14px 18px;
+  border: 1px solid rgba(212, 176, 104, 0.3);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  border-radius: 0px;
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+.reservation-form input:focus,
+.reservation-form select:focus,
+.reservation-form textarea:focus {
+  border-color: #d4b068;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.reservation-form input::placeholder,
+.reservation-form textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.reservation-form button {
+  padding: 14px 0;
+  background-color: #d4b068;
+  color: #0d0d0d;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 20px rgba(212, 176, 104, 0.3);
+}
+
+.reservation-form button:hover {
+  background-color: #e7c989;
+  box-shadow: 0 6px 24px rgba(212, 176, 104, 0.4);
+}
+
+/* MOBILE ADAPTATION */
+@media screen and (max-width: 768px) {
+  .reservation-form {
+    padding: 20px;
+  }
+}
+
+
+
